@@ -1,1 +1,2 @@
-# baekjoon_algorithm
+# algorithm
+Practice for coding tests
