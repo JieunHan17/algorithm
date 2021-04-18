@@ -24,6 +24,37 @@ int dfs(int start, vector<int> a[], bool visited[])
     return 0;
 }
 
+int dfs_stack(int start, vector<int> a[], bool visited[])
+{
+    stack<int> s;
+    s.push(start);
+
+    visited[start] = true;
+    printf("%d ", start);
+
+    while (!s.empty())
+    {
+        int cur = s.top();
+        s.pop();
+        for (int i = 0; i < a[cur].size(); i++)
+        {
+            int next = a[cur][i];
+
+            if (visited[next] == false)
+            {
+                visited[next] = true;
+                printf("%d ", next);
+
+                s.push(cur);
+                s.push(next);
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
+
 int bfs(int start, vector<int> a[], bool visited[])
 {
     queue<int> q;
@@ -73,8 +104,15 @@ int main()
     }
 
     dfs(V, a, visited);
+
     printf("\n");
     fill(visited, visited + (N + 1), false);
+
+    dfs_stack(V, a, visited);
+
+    printf("\n");
+    fill(visited, visited + (N + 1), false);
+
     bfs(V, a, visited);
 
     return 0;
