@@ -26,20 +26,24 @@ int bfs(int y, int x)
 
     while (!q.empty())
     {
-        int curX = q.front().second;
-        int curY = q.front().first;
-        q.pop();
-
-        for (int i = 0; i < 4; i++)
+        int q_size = q.size();
+        for (int idx = 0; idx < q_size; idx++)
         {
-            int nextX = curX + dirX[i];
-            int nextY = curY + dirY[i];
+            int curX = q.front().second;
+            int curY = q.front().first;
+            q.pop();
 
-            if (nextX >= 0 && nextX < M && nextY >= 0 && nextY < N && line[nextY][nextX] == '1' && !visited[nextY][nextX] && checked[nextY][nextX] == 0)
+            for (int i = 0; i < 4; i++)
             {
-                q.push(make_pair(nextY, nextX));
-                visited[nextY][nextX] = true;
-                checked[nextY][nextX] = checked[curY][curX] + 1;
+                int nextX = curX + dirX[i];
+                int nextY = curY + dirY[i];
+
+                if (nextX >= 0 && nextX < M && nextY >= 0 && nextY < N && line[nextY][nextX] == '1' && !visited[nextY][nextX] && checked[nextY][nextX] == 0)
+                {
+                    q.push(make_pair(nextY, nextX));
+                    visited[nextY][nextX] = true;
+                    checked[nextY][nextX] = checked[curY][curX] + 1;
+                }
             }
         }
     }
