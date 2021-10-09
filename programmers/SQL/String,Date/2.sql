@@ -1,0 +1,14 @@
+-- 코드를 입력하세요
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE NAME REGEXP 'el|El|eL|EL' AND ANIMAL_TYPE = 'Dog'
+ORDER BY NAME;
+
+-- 코드를 입력하세요
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE NAME LIKE '%el%' AND ANIMAL_TYPE = 'Dog'
+ORDER BY NAME;
+
+/* MySQL은 LIKE로 검사할 때 대소문자 구분을 하지 않는다. */
+/* BINARY(NAME)로 쓰면 구분 가능 */
