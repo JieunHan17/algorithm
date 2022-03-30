@@ -2,38 +2,12 @@
 #include <vector>
 #include <algorithm>
 
-#define MAX 9
-#define MAX_NUM 10001
-
 using namespace std;
 
 int N, M;
 vector<int> input;
-int output[MAX];
-bool isUsed[MAX_NUM];
-
-void func(int K)
-{
-    if (K == M)
-    {
-        for (int i = 0; i < M; i++)
-        {
-            printf("%d ", output[i]);
-        }
-        printf("\n");
-        return;
-    }
-    for (int i = 0; i < N; i++)
-    {
-        if (!isUsed[input[i]])
-        {
-            isUsed[input[i]] = true;
-            output[K] = input[i];
-            func(K + 1);
-            isUsed[input[i]] = false;
-        }
-    }
-}
+vector<int> arr;
+vector<vector<int> > output;
 
 int main()
 {
@@ -45,6 +19,43 @@ int main()
         input.push_back(num);
     }
     sort(input.begin(), input.end());
-    func(0);
+    
+    for (int i = 0; i < M; i++)
+    {
+        arr.push_back(0);
+    }
+    for (int i = M; i < N; i++)
+    {
+        arr.push_back(1);
+    }
+
+    do
+    {
+        vector<int> temp;
+        for (int i = 0; i < N; i++)
+        {
+            if (arr[i] == 0)
+            {
+                temp.push_back(input[i]);
+            }
+        }
+
+        do
+        {
+            output.push_back(temp);
+        } while (next_permutation(temp.begin(), temp.end()));
+        
+    } while (next_permutation(arr.begin(), arr.end()));
+
+    sort(output.begin(), output.end());
+
+    for (int i = 0; i < output.size(); i++)
+    {
+        for (int j = 0; j < output[i].size(); j++)
+        {
+            printf("%d ", output[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
