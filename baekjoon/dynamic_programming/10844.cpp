@@ -7,36 +7,36 @@ int main()
     int N;
     scanf("%d", &N);
 
-    long long num[10][N + 1];
+    long long dp[10][N + 1];
 
     for (int i = 0; i < 10; i++)
     {
         if (i == 0)
         {
-            num[i][1] = 0;
+            dp[i][1] = 0;
         }
         else
         {
-            num[i][1] = 1;
+            dp[i][1] = 1;
         }
     }
 
-    //( a + b ) % c = ( a % c + b % c  ) % c
-    for (int i = 2; i <= N; i++)
+    //( a + b ) % c = ( a % c + b % c ) % c
+    for (int j = 2; j <= N; j++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int i = 0; i < 10; i++)
         {
-            if (j == 0)
+            if (i == 0)
             {
-                num[j][i] = num[j + 1][i - 1] % 1000000000;
+                dp[i][j] = dp[i + 1][j - 1] % 1000000000;
             }
-            else if (j == 9)
+            else if (i == 9)
             {
-                num[j][i] = num[j - 1][i - 1] % 1000000000;
+                dp[i][j] = dp[i - 1][j - 1] % 1000000000;
             }
             else
             {
-                num[j][i] = (num[j - 1][i - 1] + num[j + 1][i - 1]) % 1000000000;
+                dp[i][j] = (dp[i + 1][j - 1] + dp[i - 1][j - 1]) % 1000000000;
             }
         }
     }
@@ -44,7 +44,7 @@ int main()
     long long ans = 0;
     for (int i = 0; i < 10; i++)
     {
-        ans += num[i][N];
+        ans += dp[i][N];
     }
 
     printf("%lld", ans % 1000000000);
