@@ -25,7 +25,7 @@ void InputData() {
 	}
 }
 int main() {
-	int ans = -1;
+	int ans = 0;
 	InputData();//입력
 	
 	queue<pair<int, int> > q;
